@@ -43,6 +43,10 @@ dependencies should be installed where they are used so that everything has what
 
 #### generating connectrpc clients
 
+in the root run `pnpm generate` to re-generate the typescript types.
+
+if we add a new service we want to expose to the frontend, we have to export the service client within the `packages/gen-api` workspace. we do this by first running the generate command and then adding the service export to `index.ts` via `export * from "./service_a/v1/service_a_pb";` which allows us to export the service from the package.
+
 ## references
 
 backend - https://github.com/jimmyl02/bazel-playground-connectrpc
