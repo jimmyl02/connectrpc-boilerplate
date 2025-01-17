@@ -23,3 +23,25 @@ run the following:
 #### adding an internal import
 
 use the import automatically within golang then run `bazelisk run //:gazelle` and reload the language server
+
+### frontend
+
+#### creating a new vite template
+
+1. `pnpm create vite@latest apps/frontend --template=react-ts`
+2. `pnpm install`
+
+#### running dev server
+
+`pnpm run dev --filter=<package>`
+
+#### installing dependencies
+
+dependencies should be installed where they are used so that everything has what it needs
+
+`pnpm install <package> --filter=<package>`
+
+## references
+
+backend - https://github.com/jimmyl02/bazel-playground-connectrpc
+frontend - https://dev.to/joemckenney/building-a-modern-grpc-powered-microservice-using-nodejs-typescript-and-connect-51a9

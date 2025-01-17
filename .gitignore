@@ -1,1 +1,7 @@
+# build system
 bazel*
+
+# frontend
+node_modules
+dist/
+.turbo
