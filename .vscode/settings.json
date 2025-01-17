@@ -4,7 +4,7 @@
     },
     "protoc": {
         "options": [
-            "--proto_path=proto",
+            "--proto_path=proto", // this is required for vscode-proto3 to properly resolve imports
           ]
     },
     "C_Cpp.errorSquiggles": "disabled"
