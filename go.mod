@@ -1,4 +1,4 @@
-module github.com/jimmyl02/bazel-playground-connectrpc
+module github.com/jimmyl02/connectrpc-boilerplate
 
 go 1.22.7
 

@@ -1,25 +1,11 @@
 package main
 
 import (
-	"context"
-	"fmt"
 	"net/http"
 
-	"connectrpc.com/connect"
-	"github.com/jimmyl02/bazel-playground-connectrpc/proto/testproto"
+	service_a_v1 "github.com/jimmyl02/connectrpc-boilerplate/proto/service_a/v1"
 )
 
 func main() {
-	client := testproto.NewTestClient(http.DefaultClient, "http://localhost:8080")
-	age := int32(10)
-	resp, err := client.SayHi(context.Background(), connect.NewRequest(&testproto.SayHiRequest{
-		Name: "myname",
-		Age:  &age,
-	}))
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Println(resp.Msg.GetResponse())
-	fmt.Println(resp.Header())
+	client := service_a_v1.NewTestClient(http.DefaultClient, "http://localhost:8080")
 }

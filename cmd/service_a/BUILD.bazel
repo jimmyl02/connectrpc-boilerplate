@@ -1,18 +1,15 @@
 load("@rules_go//go:def.bzl", "go_binary", "go_library")
 
 go_library(
-    name = "client_lib",
+    name = "service_a_lib",
     srcs = ["main.go"],
-    importpath = "github.com/jimmyl02/bazel-playground-connectrpc/cmd/client",
+    importpath = "github.com/jimmyl02/connectrpc-boilerplate/cmd/service_a",
     visibility = ["//visibility:private"],
-    deps = [
-        "//proto/testproto:testproto_go_proto",
-        "@com_connectrpc_connect//:connect",
-    ],
+    deps = ["//proto/service_a/v1:v1_go_proto"],
 )
 
 go_binary(
-    name = "client",
-    embed = [":client_lib"],
+    name = "service_a",
+    embed = [":service_a_lib"],
     visibility = ["//visibility:public"],
 )

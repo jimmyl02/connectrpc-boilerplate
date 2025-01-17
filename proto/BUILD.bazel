@@ -1,0 +1,2 @@
+#gazelle:proto_strip_import_prefix /proto
+# NOTE: this is required for imports in the proto files to work correctly
