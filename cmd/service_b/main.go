@@ -1,20 +1,26 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 
-	"golang.org/x/net/http2"
-	"golang.org/x/net/http2/h2c"
+	"connectrpc.com/connect"
+	"github.com/jimmyl02/connectrpc-boilerplate/pkg/util"
+	service_av1 "github.com/jimmyl02/connectrpc-boilerplate/proto/service_a/v1"
 )
 
 func main() {
-	fmt.Println("beginning run")
+	client := service_av1.NewServiceAServiceClient(http.DefaultClient, "http://localhost:8080")
 
-	mux := http.NewServeMux()
-	// mux.Handle(path, handler)
-	http.ListenAndServe(
-		":8080",
-		h2c.NewHandler(mux, &http2.Server{}),
-	)
+	// pretend we are also running our own connectrpc server
+	resp, err := client.Register(context.Background(), connect.NewRequest(&service_av1.RegisterRequest{
+		Email: "test-email@test.com",
+		Name:  util.ToPtr("test-name"),
+	}))
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("Response: ", resp.Msg.UserId)
 }

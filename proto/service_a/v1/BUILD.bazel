@@ -4,6 +4,7 @@ load("@rules_proto//proto:defs.bzl", "proto_library")
 proto_library(
     name = "v1_proto",
     srcs = [
+        "api.proto",
         "auth.proto",
         "service_a.proto",
     ],

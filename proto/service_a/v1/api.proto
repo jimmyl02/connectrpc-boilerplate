@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package service_a.v1;
+
+// ResponseCode represents the response code
+enum ResponseCode {
+    RESPONSE_CODE_UNSPECIFIED = 0;
+    RESPONSE_CODE_SUCCESS = 1;
+    RESPONSE_CODE_SERVER_ERROR = 2;
+}
+
+// ResponseStatus is a common response status message
+message ResponseStatus {
+    ResponseCode code = 1;
+    optional string message = 2;
+}
