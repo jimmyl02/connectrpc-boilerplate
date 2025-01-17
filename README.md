@@ -1,6 +1,8 @@
 # connectrpc-boilerplate
 
-this repository is a boilerplate example of using connectrpc. it includes a golang backend microservices architecture built with bazel and a frontend architecture built with turborepo. protobuf is used as the schema format shared between all servies
+this repository is a boilerplate example of using connectrpc within a monorepo. it includes a golang backend microservices architecture built with bazel and a frontend architecture built with turborepo. protobuf is used as the schema format shared between all services.
+
+we target two different build systems as bazel is well supported for primarily backend languages but doesn't integrate super well with the javascript world. it's a bit unfortunate for the divergence but turborepo supports javascript much better than bazel does.
 
 ## usage
 
