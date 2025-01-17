@@ -41,6 +41,8 @@ dependencies should be installed where they are used so that everything has what
 
 `pnpm install <package> --filter=<package>`
 
+#### generating connectrpc clients
+
 ## references
 
 backend - https://github.com/jimmyl02/bazel-playground-connectrpc
