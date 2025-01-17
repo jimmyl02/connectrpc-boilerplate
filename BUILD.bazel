@@ -1,0 +1,20 @@
+load("@gazelle//:def.bzl", "gazelle")
+load("@rules_go//proto:compiler.bzl", "go_proto_compiler")
+
+## gazelle:go_proto_compilers @rules_go//proto:go_proto # it seems this line is not needed
+# gazelle:go_grpc_compilers @rules_go//proto:go_proto,//:connect_go_proto_compiler
+# gazelle:prefix github.com/jimmyl02/bazel-playground-connectrpc
+gazelle(name = "gazelle")
+
+# this is a custom go proto compiler for connect
+go_proto_compiler(
+    name = "connect_go_proto_compiler",
+    options = [
+        "paths=source_relative",
+        "package_suffix",
+    ],
+    plugin = "@com_connectrpc_connect//cmd/protoc-gen-connect-go:protoc-gen-connect-go",
+    suffix = ".connect.go",
+    visibility = ["//visibility:public"],
+    deps = ["@com_connectrpc_connect//:go_default_library"],
+)

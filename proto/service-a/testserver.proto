@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package testproto;
+
+message SayHiRequest {
+    string name = 1;
+    optional string description = 2;
+    optional int32 age = 3;
+}
+  
+message SayHiResponse {
+string response = 1;
+}
+
+service Test {
+    rpc SayHi(SayHiRequest) returns (SayHiResponse) {}
+}
