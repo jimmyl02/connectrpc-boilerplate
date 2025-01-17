@@ -2,15 +2,7 @@ syntax = "proto3";
 
 package service_a.v1;
 
-message RegisterRequest {
-    string email = 1;
-    optional string name = 2;
-    optional int32 age = 3;
-}
-  
-message RegisterResponse {
-    bool success = 1;
-}
+import "service_a/v1/auth.proto";
 
 service ServiceAService {
     rpc Register(RegisterRequest) returns (RegisterResponse) {}

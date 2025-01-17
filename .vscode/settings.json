@@ -1,5 +1,11 @@
 {
     "go.toolsEnvVars": {
         "GOPACKAGESDRIVER": "${workspaceFolder}/scripts/gopackagesdriver.sh"
-    }
+    },
+    "protoc": {
+        "options": [
+            "--proto_path=proto",
+          ]
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }
