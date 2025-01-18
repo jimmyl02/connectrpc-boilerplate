@@ -12,7 +12,8 @@
     }
   },
   "devDependencies": {
-    "typescript": "latest"
+    "typescript": "latest",
+    "@repo/typescript-config": "workspace:*"
   },
   "dependencies": {
     "@bufbuild/protobuf": "^2.2.3"
