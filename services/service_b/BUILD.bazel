@@ -3,7 +3,7 @@ load("@rules_go//go:def.bzl", "go_binary", "go_library")
 go_library(
     name = "service_b_lib",
     srcs = ["main.go"],
-    importpath = "github.com/jimmyl02/connectrpc-boilerplate/cmd/service_b",
+    importpath = "github.com/jimmyl02/connectrpc-boilerplate/services/service_b",
     visibility = ["//visibility:private"],
     deps = [
         "//pkg/util",

@@ -10,9 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@repo/gen-api": "workspace:*",
     "@connectrpc/connect": "^2.0.1",
+    "@connectrpc/connect-query": "^2.0.1",
     "@connectrpc/connect-web": "^2.0.1",
+    "@repo/gen-api": "workspace:*",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

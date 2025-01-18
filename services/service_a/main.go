@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"connectrpc.com/connect"
+	"github.com/jimmyl02/connectrpc-boilerplate/pkg/cors"
 	"github.com/jimmyl02/connectrpc-boilerplate/pkg/util"
 	service_av1 "github.com/jimmyl02/connectrpc-boilerplate/proto/service_a/v1"
 	"go.uber.org/zap"
@@ -36,6 +37,25 @@ func (s *ServiceAServer) Register(ctx context.Context, req *connect.Request[serv
 	}), nil
 }
 
+// buildServer builds the server handler and wraps it with the appropriate middleware
+func buildServer(
+	logger *zap.Logger,
+) (path string, handler http.Handler) {
+	// declare server
+	server := &ServiceAServer{
+		logger: logger,
+	}
+
+	// construct the path and handler
+	path, handler = service_av1.NewServiceAServiceHandler(server)
+
+	// wrap the handler with middleware
+	handler = cors.WithCORS(handler, []string{"http://localhost:3000"})
+
+	// return the path and handler
+	return path, handler
+}
+
 func main() {
 	// initialize logger
 	logger, err := zap.NewDevelopment()
@@ -43,14 +63,9 @@ func main() {
 		panic(err)
 	}
 
-	// declare server
-	server := &ServiceAServer{
-		logger: logger,
-	}
-
-	// begin serving
+	// declare the mux
 	mux := http.NewServeMux()
-	path, handler := service_av1.NewServiceAServiceHandler(server)
+	path, handler := buildServer(logger)
 	mux.Handle(path, handler)
 
 	// listen and service

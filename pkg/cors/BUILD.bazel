@@ -1,0 +1,12 @@
+load("@rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "cors",
+    srcs = ["cors.go"],
+    importpath = "github.com/jimmyl02/connectrpc-boilerplate/pkg/cors",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_connectrpc_cors//:cors",
+        "@com_github_rs_cors//:cors",
+    ],
+)

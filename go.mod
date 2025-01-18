@@ -4,6 +4,8 @@ go 1.22.7
 
 require (
 	connectrpc.com/connect v1.18.1
+	connectrpc.com/cors v0.1.0
+	github.com/rs/cors v1.11.1
 	go.uber.org/zap v1.27.0
 	golang.org/x/net v0.30.0
 )

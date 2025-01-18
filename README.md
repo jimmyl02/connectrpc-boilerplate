@@ -10,7 +10,7 @@ we target two different build systems as bazel is well supported for primarily b
 
 #### running the backend service
 
-`bazelisk run //cmd/service-a`
+`bazelisk run //services/service-a`
 
 #### adding an external import
 
