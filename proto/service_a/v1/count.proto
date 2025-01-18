@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package service_a.v1;
+
+import "service_a/v1/api.proto";
+
+message NewCountRequest {
+    int32 amount = 1;
+}
+  
+message NewCountResponse {
+    ResponseStatus status = 1;
+}
+
+message GetCountRequest {}
+
+message GetCountResponse {
+    ResponseStatus status = 1;
+    int32 count = 2;
+}

@@ -3,7 +3,10 @@ syntax = "proto3";
 package service_a.v1;
 
 import "service_a/v1/auth.proto";
+import "service_a/v1/count.proto";
 
 service ServiceAService {
     rpc Register(RegisterRequest) returns (RegisterResponse) {}
+    rpc NewCount(NewCountRequest) returns (NewCountResponse) {}
+    rpc GetCount(GetCountRequest) returns (GetCountResponse) {}
 }

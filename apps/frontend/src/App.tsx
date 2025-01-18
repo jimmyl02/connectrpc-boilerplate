@@ -1,28 +1,33 @@
-import { createClient } from "@connectrpc/connect";
-import { createConnectTransport } from "@connectrpc/connect-web";
-import { ServiceAService } from "@repo/gen-api";
-import { useEffect, useState } from "react";
+import {
+  createConnectQueryKey,
+  useMutation,
+  useQuery,
+  useTransport,
+} from "@connectrpc/connect-query";
+import { serviceA } from "@repo/gen-api";
+import { useQueryClient } from "@tanstack/react-query";
 import "./App.css";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 
 function App() {
-  const [count, setCount] = useState(0);
+  // get the query client
+  const queryClient = useQueryClient();
+  const transport = useTransport();
 
-  useEffect(() => {
-    const transport = createConnectTransport({
-      baseUrl: "http://localhost:8080",
-    });
-    const client = createClient(ServiceAService, transport);
-
-    client
-      .register({
-        email: "asdf",
-      })
-      .then((res) => {
-        console.log(res);
+  // create the query and mutation hooks
+  const { data } = useQuery(serviceA.getCount);
+  const updateCount = useMutation(serviceA.newCount, {
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: createConnectQueryKey({
+          schema: serviceA.getCount,
+          transport: transport,
+          cardinality: "finite",
+        }),
       });
-  }, []);
+    },
+  });
 
   return (
     <>
@@ -36,8 +41,8 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <button onClick={() => updateCount.mutate({ amount: 1 })}>
+          count is {data && data.count ? data.count : 0}
         </button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR

@@ -6,6 +6,7 @@ proto_library(
     srcs = [
         "api.proto",
         "auth.proto",
+        "count.proto",
         "service_a.proto",
     ],
     strip_import_prefix = "/proto",

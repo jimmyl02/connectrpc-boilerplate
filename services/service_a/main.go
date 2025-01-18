@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"sync/atomic"
 
 	"connectrpc.com/connect"
 	"github.com/jimmyl02/connectrpc-boilerplate/pkg/cors"
@@ -16,6 +17,29 @@ import (
 
 type ServiceAServer struct {
 	logger *zap.Logger
+
+	// internal constructs
+	count int32
+}
+
+// GetCount implements v1.ServiceAServiceHandler.
+func (s *ServiceAServer) GetCount(context.Context, *connect.Request[service_av1.GetCountRequest]) (*connect.Response[service_av1.GetCountResponse], error) {
+	return connect.NewResponse(&service_av1.GetCountResponse{
+		Status: util.ToPtr(service_av1.ResponseStatus{
+			Code: service_av1.ResponseCode_RESPONSE_CODE_SUCCESS,
+		}),
+		Count: atomic.LoadInt32(&s.count),
+	}), nil
+}
+
+// NewCount implements v1.ServiceAServiceHandler.
+func (s *ServiceAServer) NewCount(context.Context, *connect.Request[service_av1.NewCountRequest]) (*connect.Response[service_av1.NewCountResponse], error) {
+	atomic.AddInt32(&s.count, 1)
+	return connect.NewResponse(&service_av1.NewCountResponse{
+		Status: util.ToPtr(service_av1.ResponseStatus{
+			Code: service_av1.ResponseCode_RESPONSE_CODE_SUCCESS,
+		}),
+	}), nil
 }
 
 // Register implements v1.ServiceAServiceHandler.
@@ -50,7 +74,7 @@ func buildServer(
 	path, handler = service_av1.NewServiceAServiceHandler(server)
 
 	// wrap the handler with middleware
-	handler = cors.WithCORS(handler, []string{"http://localhost:3000"})
+	handler = cors.WithCORS(handler, []string{"http://localhost:5173"})
 
 	// return the path and handler
 	return path, handler

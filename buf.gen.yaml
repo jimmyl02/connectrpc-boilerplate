@@ -9,3 +9,6 @@ plugins:
     include_imports: true
     # Add more plugin options here
     opt: target=ts
+  - local: protoc-gen-connect-query
+    out: packages/gen-api/src
+    opt: target=ts
