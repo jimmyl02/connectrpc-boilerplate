@@ -2,7 +2,6 @@ import {
   createConnectQueryKey,
   useMutation,
   useQuery,
-  useTransport,
 } from "@connectrpc/connect-query";
 import { serviceA } from "@repo/gen-api";
 import { useQueryClient } from "@tanstack/react-query";
@@ -13,7 +12,6 @@ import viteLogo from "/vite.svg";
 function App() {
   // get the query client
   const queryClient = useQueryClient();
-  const transport = useTransport();
 
   // create the query and mutation hooks
   const { data } = useQuery(serviceA.getCount);
@@ -22,7 +20,6 @@ function App() {
       queryClient.invalidateQueries({
         queryKey: createConnectQueryKey({
           schema: serviceA.getCount,
-          transport: transport,
           cardinality: "finite",
         }),
       });
